@@ -33,3 +33,4 @@ out/
 
 ### MAC ###
 .DS_Store
+/bin/
