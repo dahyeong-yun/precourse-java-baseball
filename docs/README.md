@@ -17,13 +17,17 @@
 - `camp.nextstep.edu.missionutils`에서 제공하는 `Console`과 `Random`을 사용할 것
 - `ApplicationTest`의 2개 테스트는 통과 되어야 함.
 - 프로그램 시작 지점은 `Application`의 `main()` 이다.
+- indent는 1까지만 허용한다.
+- else 예약어를 쓰지 않는다.
 
 ### 과제 진행 요구사항
 - 커밋 메세지 규칙은 AngularJS commit conventions를 [참고](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)한다.
 
 ## 기능 리스트
-- 게임을 시작하면 게임 메뉴가 실행된다.
-  - [ ] 게임 메뉴에서 2를 입력하면 게임이 종료, 1을 입력하면 게임을 다시 시작한다.
+- [ ] 게임을 시작하면 게임 메뉴가 실행된다.
+  - [ ] 게임 메뉴에서
+    - [X] 2를 입력하면 게임이 종료
+    - [ ] 1을 입력하면 게임을 다시 시작한다.
 - [ ] 게임은 기본 setting으로 3개의 공을 갖는다.
   - `baseball.Game`는 `List<Ball> gameBalls`를 가지고 시작한다.
 - [ ] 각각의 공은 순서와 값을 갖는다. 
