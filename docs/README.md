@@ -24,23 +24,21 @@
 - 커밋 메세지 규칙은 AngularJS commit conventions를 [참고](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)한다.
 
 ## 기능 리스트
+
+### `baseball.Game`
 - [ ] 게임을 시작하면 게임 메뉴가 실행된다.
   - [ ] 게임 메뉴에서
     - [X] 2를 입력하면 게임이 종료
     - [ ] 1을 입력하면 게임을 다시 시작한다.
 - [ ] 게임은 기본 setting으로 3개의 공을 갖는다.
   - `baseball.Game`는 `List<Ball> gameBalls`를 가지고 시작한다.
-- [ ] 각각의 공은 순서와 값을 갖는다. 
-  - `baseball.Ball`은 멤버 변수로 `value`와 `order`를 가진다.
-  - [ ] 공의 값은 매번 랜덤으로 주어진다.
-  - [ ] 각 공의 값은 중복되지 않는다.
+  - [ ] `baseball.Game.start()` 안에서는 '입력()) -> 정답 여부 체크(`isAnswer()`)' 루틴을 반복해야한다.
+  - 입력값은 validation 체크가 되어야 한다.
+    - 전체 입력값은 오로지 1~3자리 이하의 숫자만 가능하다.
+      - [ ] 1 <= String.length() <= 3
+      - [ ] String.chatAt(i) -> int casting이 가능해야함
 - [ ] 게임을 플레이 하는 경우 (게임을 시작하는 것과 매판 플레이 하는 것을 별개로 봄)
-  - `baseball.Game.play()` 해당 
-  - [ ] 입력값이 유효값인지 판단한다. : `baseball.Game.play()` 안에서는 '입력()) -> 정답 여부 체크(`isAnswer()`)' 루틴을 반복해야한다
-    - 입력값은 validation 체크가 되어야 한다.
-      - 오로지 1~3자리 이하의 숫자만 가능하다.
-        - [ ] 1 <= String.length() <= 3
-        - [ ] String.chatAt(i) -> int casting이 가능해야함
+  - `baseball.Game.play()` 해당
   - [ ] 입력값과 게임이 갖고 있는 공을 비교한다.
     - `Result isAnswer(input)`
     - 이때 input의 length만큼 비교를 반복한다. -> for
@@ -53,6 +51,10 @@
     - Result의 결과를 출력한다.
   - [ ] 오답이면 맞출때까지 지속한다.
   - [ ] 정답을 맞추면 게임 메뉴로 빠져 나온다.
- 
 
-  
+### `baseball.Ball`
+- [ ] 각각의 공은 순서와 값을 갖는다. 
+  - `baseball.Ball`은 멤버 변수로 `value`와 `order`를 가진다.
+  - [ ] 공의 값은 매번 랜덤으로 주어진다.
+  - [ ] 각 공의 값은 중복되지 않는다.
+- [X] 생성 시점에 입력 값이 유효값인지 판단한다.
