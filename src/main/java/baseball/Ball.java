@@ -1,20 +1,21 @@
 package baseball;
 
 public class Ball {
-    private int value;
+    private final int value;
 
-    public Ball(String input) {
-        int value = Integer.parseInt(input);
-        if(validate(value)) {
-            this.value = value;
-        }
+    private Ball(Integer value) {
+        this.value = value;
     }
 
-    private boolean validate(int value) {
-        if(1 > value || value > 9) {
+    public static Ball createBall(Integer input) {
+        if(!validate(input)) {
             throw new IllegalArgumentException();
         }
-        return true;
+        return new Ball(input);
+    }
+
+    private static boolean validate(int value) {
+        return 1 <= value && value <= 9;
     }
 
     public int getValue() {
