@@ -27,7 +27,7 @@ public class Ball {
         return this.value;
     }
 
-    public PlayJudge pitch(Ball answer) {
+    private PlayJudge pitch(Ball answer) {
         if(this.order == answer.order && this.value == answer.value) {
             return PlayJudge.STRIKE;
         }

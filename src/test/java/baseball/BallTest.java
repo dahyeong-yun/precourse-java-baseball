@@ -1,12 +1,27 @@
 package baseball;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class BallTest {
+
+    List<Ball> answers;
+
+    @BeforeEach
+    void setting() {
+        answers = new ArrayList<>();
+        answers.add(Ball.createBall(0, 1));
+        answers.add(Ball.createBall(1, 2));
+        answers.add(Ball.createBall(2, 3));
+
+    }
 
     @Test
     @DisplayName("공은 String 값을 정수 값으로 갖는다.")
@@ -29,29 +44,23 @@ public class BallTest {
     @DisplayName("순서와 값이 같으면 스트라이크")
     void 순서와_값이_같으면_스트라이트() {
         Ball userBall = Ball.createBall(0,1);
-        Ball gameBall = Ball.createBall(0,1);
-
-        PlayJudge playJudge = userBall.pitch(gameBall);
+        PlayJudge playJudge = userBall.play(answers);
         assertThat(playJudge).isEqualTo(PlayJudge.STRIKE);
     }
 
     @Test
     @DisplayName("순서는 다르고, 값이 같으면 볼")
     void 순서는_다르고_값이_같으면_볼() {
-        Ball userBall = Ball.createBall(0,1);
-        Ball gameBall = Ball.createBall(1,1);
-
-        PlayJudge playJudge = userBall.pitch(gameBall);
+        Ball userBall = Ball.createBall(1,1);
+        PlayJudge playJudge = userBall.play(answers);
         assertThat(playJudge).isEqualTo(PlayJudge.BALL);
     }
 
     @Test
     @DisplayName("순서와 값이 모두 다르면 NULL")
     void 순서와_값이_모두_다르면_NULL() {
-        Ball userBall = Ball.createBall(0,1);
-        Ball gameBall = Ball.createBall(1,2);
-
-        PlayJudge playJudge = userBall.pitch(gameBall);
-        assertThat(playJudge).isNull();
+        Ball userBall = Ball.createBall(0,5);
+        PlayJudge playJudge = userBall.play(answers);
+        assertThat(playJudge).isEqualTo(PlayJudge.NOTHING);
     }
 }
