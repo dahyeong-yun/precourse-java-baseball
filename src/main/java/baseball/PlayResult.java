@@ -1,8 +1,10 @@
 package baseball;
 
 public class PlayResult {
-    public int strike;
-    public int ball;
+    private int strike;
+    private int ball;
+
+    private PlayResult() {}
 
     public static PlayResult init() {
         return new PlayResult();
@@ -34,5 +36,13 @@ public class PlayResult {
         if(this.ball > 0 && this.strike > 0) {
             System.out.println(this.ball + "볼 " + this.strike + "스트라이크");
         }
+    }
+
+    public int getStrikeCount() {
+        return this.strike;
+    }
+
+    public int getBallCount() {
+        return this.ball;
     }
 }
