@@ -50,7 +50,6 @@ public class Ball {
             result = PlayJudge.NOTHING;
         }
 
-        // 스트라이크, 볼, 낫띵 중 맥스 값
         return result;
     }
 }

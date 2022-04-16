@@ -1,5 +1,5 @@
 package baseball;
 
 public enum PlayJudge {
-    STRIKE, BALL, NOTHING;
+    STRIKE, BALL, NOTHING
 }

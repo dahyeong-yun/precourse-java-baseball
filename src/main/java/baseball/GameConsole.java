@@ -5,7 +5,6 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.List;
 
-// 명령어를 게임 플레이에 알맞게 변경 하여 넘겨주고, 명령어 유효성을 검증하고, 지시어를 출력하는 역할
 public class GameConsole {
 
     public static final String FIRST_INPUT = "1";
@@ -14,16 +13,21 @@ public class GameConsole {
 
 
     public static void start() {
-        game = new Game();
         String input = FIRST_INPUT;
-        while(!isEndSign(input)) { // TODO 이 부분이 3 스트라이크여야 함
+        while(!isEndSign(input)) {
+            game = new Game();
             execute();
+            printGameMenu();
             input = readInput();
         }
     }
 
     private static String readInput() {
         return Console.readLine();
+    }
+
+    private static void printGameMenu() {
+        System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
     }
 
     private static void execute() {
@@ -38,6 +42,11 @@ public class GameConsole {
             playResult = game.play(inputBalls); // 하나의 인풋에 하나의 플레이만 존재. TODO 게임을 콘솔 내에서 새로 생성 해야함 -> 생성 시점에 랜덤 넘버를 가져가기 위해서
             playResult.report();
         }
+        printGameEnd();
+    }
+
+    private static void printGameEnd() {
+        System.out.println("3개 숫자를 모두 맞추셨습니다! 게임 종료");
     }
 
     private static List<Ball> interpret(String sign) {

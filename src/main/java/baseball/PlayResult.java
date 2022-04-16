@@ -1,7 +1,5 @@
 package baseball;
 
-import java.util.List;
-
 public class PlayResult {
     public int strike;
     public int ball;
@@ -24,9 +22,17 @@ public class PlayResult {
     }
 
     public void report() {
-        // 낫싱이면
-        // 볼이 없으면
-        // 스트라이크가 없으면
-        System.out.println("낫싱" + "3스트라이크" + "1볼 1스트라이크" + "3스트라이크" + "게임 종료");
+        if(this.ball == 0 && this.strike == 0) {
+            System.out.println("낫싱");
+        }
+        if(this.ball > 0 && this.strike == 0) {
+            System.out.println(this.ball + "볼");
+        }
+        if(this.ball == 0 && this.strike > 0) {
+            System.out.println(this.strike + "스트라이크");
+        }
+        if(this.ball > 0 && this.strike > 0) {
+            System.out.println(this.ball + "볼 " + this.strike + "스트라이크");
+        }
     }
 }

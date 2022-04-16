@@ -2,16 +2,35 @@ package baseball;
 
 import java.util.ArrayList;
 import java.util.List;
+import camp.nextstep.edu.missionutils.Randoms;
 
-// 하나의 게임이 시작하면서 끝까지를 책임지는 클래스. 정답을 가지고 있고, 지시어에 따라 정답과 비교하여 결과를 만들어내는 역할
 public class Game {
     private static List<Ball> answers;
 
     public Game() {
         answers = new ArrayList<>();
-        answers.add(Ball.createBall(0,1));
-        answers.add(Ball.createBall(1,2));
-        answers.add(Ball.createBall(2,3));
+        setAnswers();
+    }
+
+    private void setAnswers() {
+        while (answers.size() < 3) {
+            pickNonDuplicateBall();
+        }
+    }
+
+    private void pickNonDuplicateBall() {
+        int newNum = Randoms.pickNumberInRange(1, 10);
+        if(!isDuplicate(newNum)) {
+            answers.add(Ball.createBall(answers.size(), newNum));
+        }
+    }
+
+    private boolean isDuplicate(int newNum) {
+        List<Integer> occupiedNumber = new ArrayList<>();
+        for (Ball answer : answers) {
+            occupiedNumber.add(answer.getValue());
+        }
+        return occupiedNumber.contains(newNum);
     }
 
     public PlayResult play(List<Ball> inputBalls) {
@@ -21,8 +40,6 @@ public class Game {
             PlayJudge judge = inputBall.play(answers);
             playResult.note(judge);
         }
-
-        playResult.strike = 3; // TODO 일단 테스트를 통과하기 위한 코드, 삭제 필요
 
         return playResult;
     }
