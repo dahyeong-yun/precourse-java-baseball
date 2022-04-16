@@ -26,40 +26,40 @@
 ## 기능 리스트
 
 ### `baseball.GameConsole`
-- [ ] 게임을 시작하면 게임 콘솔을 실행한다.
-  - [ ] 게임 콘솔에서
+- [X] 게임을 시작하면 게임 콘솔을 실행한다.
+  - 게임 콘솔에서
     - [X] 2를 입력하면 종료
-    - [ ] 1을 입력하면 게임을 다시 시작한다.
-  - 입력값은 validation 체크가 되어야 한다.
-    - 전체 입력값은 오로지 1~3자리 이하의 숫자만 가능하다.
-      - [ ] 1 <= String.length() <= 3
+    - [X] 1을 입력하면 게임을 다시 시작한다.
+  - [X] 입력값은 validation 체크가 되어야 한다.
+    - [ ] 전체 입력값은 오로지 1~3자리 이하의 숫자만 가능하다.
+      - [X] 1 <= String.length() <= 3
       - [ ] String.chatAt(i) -> int casting이 가능해야함 
+  - [X] `baseball.GameConsole.excute()` 안에서는 '입력()) -> 종료 여부 체크(`PlayResult.isNotGameEnd()`)' 루틴(=3스트라이크를 체크)을 반복해야한다.
+
 ### `baseball.Game`
-- [ ] 게임은 기본 setting으로 3개의 공을 갖는다.
-  - [ ] `baseball.GameC`는 `List<Ball> gameBalls`를 가지고 시작한다.
-  - [ ] `baseball.Game.start()` 안에서는 '입력()) -> 종료 여부 체크(`isEnd()`)' 루틴(=3스트라이크를 체크)을 반복해야한다.
-- [ ] 게임을 플레이 하는 경우 (게임을 시작하는 것과 매판 플레이 하는 것을 별개로 봄)
-  - `baseball.Game.play()` 해당
-  - [ ] 입력값과 게임이 갖고 있는 공을 비교한다.
-    - `Result isAnswer(input)`
-    - 이때 input의 length만큼 비교를 반복한다. -> for
-    - [ ] 입력값과 공의 순서와 값이 모두 같으면 `스트라이크` -> Status.STRIKE
-    - [ ] 입력값과 공의 순서는 다르고 값만 같으면 `볼` -> Status.BALL
-    - [ ] 입력값과 공의 순서와 값이 모두 같지 않으면 `낫싱` -> Status.NOTHING
-    - [ ] 비교하는 메소드는 `PlayResult`를 반환한다.
-      - [ ] 3스트라이크 일때까지 지속한다.
-      - [ ] 3스트라이크면 게임 콘솔로 빠져 나온다.
+- [X] 게임은 기본 setting으로 3개의 공을 갖는다.
+  - [X] `baseball.Game`는 `List<Ball> answers`를 가지고 시작한다.
+- 게임을 플레이 하는 경우는 `baseball.Game.play()` 해당 (게임을 시작하는 것과 매판 플레이 하는 것을 별개로 봄)
+  - [X] 입력값과 게임이 갖고 있는 공 전체를 비교한다.
+    - `PlayJudge judge = inputBall.play(answers);`
+    - [X] 이때 input의 length만큼 비교를 반복한다. -> for
+  - [X] 3스트라이크 일때까지 지속한다. ` while(playResult.isNotGameEnd())`
 
 ### `baseball.PlayResult`
-- [ ] 플레이 결과를 저장한다.
+- [X] `PlayResult.note(PlayJudge)` 에서 판정 결과를 가지고 플레이 전체의 결과를 저장한다. 
   - [X] 스트라이크의 수
-  - [ ] 볼의 수
-- [X] 플레이의 결과를 가지고 종료 여부(3스트라이크여부)를 판단한다.
-- [ ] 플레이 결과를 유저가 인지할 수 있는 형태로 출력한다.
+  - [X] 볼의 수
+- [X] 플레이의 결과를 가지고 종료 여부(3스트라이크여부)를 판단한다. `PlayResult.isNotGameEnd()`
+- [X] 플레이 결과를 유저가 인지할 수 있는 형태로 출력한다. `PlayResult.report()`
 
 ### `baseball.Ball`
-- [ ] 각각의 공은 순서와 값을 갖는다. 
+- [X] 각각의 공은 순서와 값을 갖는다. 
   - `baseball.Ball`은 멤버 변수로 `value`와 `order`를 가진다.
-  - [ ] 공의 값은 매번 랜덤으로 주어진다.
-  - [ ] 각 공의 값은 중복되지 않는다.
+  - [X] 공의 값은 매번 랜덤으로 주어진다.
+  - [X] 각 공의 값은 중복되지 않는다.
 - [X] 생성 시점에 입력 값이 유효값인지 판단한다.
+- [X] 공과 공을 비교하여 strike냐, ball이냐, 낫싱이냐 를 판정한다. `Ball.play(List<Ball>)`
+  - [X] 입력값과 공의 순서와 값이 모두 같으면 `스트라이크` -> `PlayJudge.STRIKE`
+  - [X] 입력값과 공의 순서는 다르고 값만 같으면 `볼` -> `PlayJudge.BALL`
+  - [X] 입력값과 공의 순서와 값이 모두 같지 않으면 `낫싱` -> `PlayJudge.NOTHING`
+  - [X] 전체 결과를 `PlayJudge`를 반환한다.
