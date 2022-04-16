@@ -13,24 +13,30 @@ public class Game {
     }
 
     private void setAnswers() {
-        while (answers.size() < 3) {
+        while (isAnswersQualified()) {
             pickNonDuplicateBall();
         }
     }
 
+    private boolean isAnswersQualified() {
+        return answers.size() < 3;
+    }
+
     private void pickNonDuplicateBall() {
-        int newNum = Randoms.pickNumberInRange(1, 10);
-        if(!isDuplicate(newNum)) {
-            answers.add(Ball.createBall(answers.size(), newNum));
+        int newNumber = Randoms.pickNumberInRange(1, 10);
+        if(isNotDuplicate(newNumber)) {
+            answers.add(Ball.createBall(answers.size(), newNumber));
         }
     }
 
-    private boolean isDuplicate(int newNum) {
-        List<Integer> occupiedNumber = new ArrayList<>();
+    private boolean isNotDuplicate(int newNumber) {
+        List<Integer> occupiedNumbers = new ArrayList<>();
+
         for (Ball answer : answers) {
-            occupiedNumber.add(answer.getValue());
+            occupiedNumbers.add(answer.getValue());
         }
-        return occupiedNumber.contains(newNum);
+
+        return !occupiedNumbers.contains(newNumber);
     }
 
     public PlayResult play(List<Ball> inputBalls) {
