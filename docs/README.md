@@ -31,9 +31,8 @@
     - [X] 2를 입력하면 종료
     - [X] 1을 입력하면 게임을 다시 시작한다.
   - [X] 입력값은 validation 체크가 되어야 한다.
-    - [ ] 전체 입력값은 오로지 1~3자리 이하의 숫자만 가능하다.
+    - [X] 전체 입력값은 오로지 1~3자리 이하의 숫자만 가능하다.
       - [X] 1 <= String.length() <= 3
-      - [ ] String.chatAt(i) -> int casting이 가능해야함 
   - [X] `baseball.GameConsole.excute()` 안에서는 '입력()) -> 종료 여부 체크(`PlayResult.isNotGameEnd()`)' 루틴(=3스트라이크를 체크)을 반복해야한다.
 
 ### `baseball.Game`
