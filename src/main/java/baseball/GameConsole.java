@@ -18,7 +18,7 @@ public class GameConsole {
     private static Game game;
 
     public static void start() {
-        String input = "";
+        String input;
         do {
             game = Game.startNewGame();
             execute();
@@ -31,14 +31,17 @@ public class GameConsole {
         return Console.readLine();
     }
 
+    private static String requestInput() {
+        printInstruction(MESSAGE_REQUEST_INPUT);
+        String sign = readInput();
+        validate(sign);
+        return sign;
+    }
+
     private static void execute() {
         PlayResult playResult = PlayResult.init();
         while(playResult.isNotGameEnd()) {
-            printInstruction(MESSAGE_REQUEST_INPUT);
-            String sign = readInput();
-
-            validate(sign);
-
+            String sign = requestInput();
             List<Ball> inputBalls = interpret(sign);
             playResult = game.play(inputBalls);
             playResult.report();
