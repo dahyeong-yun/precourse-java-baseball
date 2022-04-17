@@ -7,12 +7,16 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Game {
     private static List<Ball> answers;
 
-    public Game() {
-        answers = new ArrayList<>();
+    private Game() {
         setAnswers();
     }
 
+    public static Game startNewGame() {
+        return new Game();
+    }
+
     private void setAnswers() {
+        answers = new ArrayList<>();
         while (isAnswersQualified()) {
             pickNonDuplicateBall();
         }
