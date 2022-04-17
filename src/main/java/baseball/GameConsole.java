@@ -11,17 +11,17 @@ public class GameConsole {
     public static final String END_SIGN = "2";
 
     public static final String MESSAGE_REQUEST_INPUT = "숫자를 입력해 주세요 : ";
-    public static final String MESSAGE_CHOICE_GAME_MENU = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요";
-    public static final String MESSAGE_GAME_END = "3개 숫자를 모두 맞추셨습니다! 게임 종료";
+    public static final String MESSAGE_CHOICE_GAME_MENU = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n";
+    public static final String MESSAGE_GAME_END = "3개 숫자를 모두 맞추셨습니다! 게임 종료\n";
     public static final String EXCEPTION_LENGTH = "숫자는 3글자 이하여야 합니다.";
+    private static final String EXCEPTION_FORMAT = "숫자를 입력해야 합니다.";
 
     private static Game game;
-
 
     public static void start() {
         String input = FIRST_INPUT;
         while(!isEndSign(input)) {
-            game = new Game(); // TODO 테스트 가능 하도록 변경
+            game = Game.startNewGame(); // TODO 테스트 가능 하도록 변경
             execute();
             printInstruction(MESSAGE_CHOICE_GAME_MENU);
             input = readInput();
@@ -60,6 +60,12 @@ public class GameConsole {
     private static void validate(String sign) {
         if (sign.length() > 3 || sign.length() < 1) {
             throw new IllegalArgumentException(EXCEPTION_LENGTH);
+        }
+        
+        try {
+            Double.parseDouble(sign);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(EXCEPTION_FORMAT);
         }
     }
 
