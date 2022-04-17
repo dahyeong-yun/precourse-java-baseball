@@ -34,20 +34,16 @@ public class Ball {
         if(this.order != answer.order && this.value == answer.value) {
             return PlayJudge.BALL;
         }
-        return null;
+        return PlayJudge.NOTHING;
     }
 
     public PlayJudge play(List<Ball> answers) {
-        PlayJudge result = null;
+        PlayJudge result = PlayJudge.NOTHING;
 
         int idx = 0;
-        while(result == null && idx < 3) {
+        while(result.isNothing() && idx < 3) {
             result = pitch(answers.get(idx));
             idx++;
-        }
-
-        if(result == null) {
-            result = PlayJudge.NOTHING;
         }
 
         return result;
