@@ -9,15 +9,21 @@ public class GameConsole {
 
     public static final String FIRST_INPUT = "1";
     public static final String END_SIGN = "2";
+
+    public static final String MESSAGE_REQUEST_INPUT = "숫자를 입력해 주세요 : ";
+    public static final String MESSAGE_CHOICE_GAME_MENU = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요";
+    public static final String MESSAGE_GAME_END = "3개 숫자를 모두 맞추셨습니다! 게임 종료";
+    public static final String EXCEPTION_LENGTH = "숫자는 3글자 이하여야 합니다.";
+
     private static Game game;
 
 
     public static void start() {
         String input = FIRST_INPUT;
         while(!isEndSign(input)) {
-            game = new Game();
+            game = new Game(); // TODO 테스트 가능 하도록 변경
             execute();
-            printGameMenu();
+            printInstruction(MESSAGE_CHOICE_GAME_MENU);
             input = readInput();
         }
     }
@@ -26,27 +32,19 @@ public class GameConsole {
         return Console.readLine();
     }
 
-    private static void printGameMenu() {
-        System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
-    }
-
     private static void execute() {
         PlayResult playResult = PlayResult.init();
         while(playResult.isNotGameEnd()) {
-            printInstruction();
+            printInstruction(MESSAGE_REQUEST_INPUT);
             String sign = readInput();
 
             validate(sign);
 
             List<Ball> inputBalls = interpret(sign);
-            playResult = game.play(inputBalls); // 하나의 인풋에 하나의 플레이만 존재. TODO 게임을 콘솔 내에서 새로 생성 해야함 -> 생성 시점에 랜덤 넘버를 가져가기 위해서
+            playResult = game.play(inputBalls);
             playResult.report();
         }
-        printGameEnd();
-    }
-
-    private static void printGameEnd() {
-        System.out.println("3개 숫자를 모두 맞추셨습니다! 게임 종료");
+        printInstruction(MESSAGE_GAME_END);
     }
 
     private static List<Ball> interpret(String sign) {
@@ -61,12 +59,12 @@ public class GameConsole {
 
     private static void validate(String sign) {
         if (sign.length() > 3 || sign.length() < 1) {
-            throw new IllegalArgumentException("숫자는 3글자 이하여야 합니다.");
+            throw new IllegalArgumentException(EXCEPTION_LENGTH);
         }
     }
 
-    private static void printInstruction() {
-        System.out.print("숫자를 입력해 주세요 : ");
+    private static void printInstruction(String message) {
+        System.out.print(message);
     }
 
     private static boolean isEndSign(String temp) {
