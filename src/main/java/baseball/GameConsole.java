@@ -7,7 +7,6 @@ import java.util.List;
 
 public class GameConsole {
 
-    public static final String FIRST_INPUT = "1";
     public static final String END_SIGN = "2";
 
     public static final String MESSAGE_REQUEST_INPUT = "숫자를 입력해 주세요 : ";
@@ -19,13 +18,13 @@ public class GameConsole {
     private static Game game;
 
     public static void start() {
-        String input = FIRST_INPUT;
-        while(!isEndSign(input)) {
-            game = Game.startNewGame(); // TODO 테스트 가능 하도록 변경
+        String input = "";
+        do {
+            game = Game.startNewGame();
             execute();
             printInstruction(MESSAGE_CHOICE_GAME_MENU);
             input = readInput();
-        }
+        } while(!isEndSign(input));
     }
 
     private static String readInput() {
